@@ -57,7 +57,6 @@
 		self.edit = function() {
 			self.selectedWeapon(this);
 			$.mobile.changePage("#edit");
-			$("#edit").trigger('create');
 		}
 		
 		self.totalWeight = ko.computed(function() {
