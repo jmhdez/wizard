@@ -21,56 +21,12 @@
 	<script type="text/javascript" src="js/ko.custom-bindings.js"></script>
 	<link rel="stylesheet" href="css/ko.custom-bindings.css" />
 	
+	<script type="text/javascript" src="js/ViewModel.js"></script>
+	
 	<script type="text/javascript">
-	
-	var WeaponModel = function(name, weight, ammoType, closeCombatRating, rangeRating) {
-		this.name = ko.observable(name);
-		this.weight = ko.observable(weight || 0);
-		this.ammoType = ko.observable(ammoType || 'Ilimitada');
-		this.closeCombatRating = ko.observable(closeCombatRating || 0);
-		this.rangeRating = ko.observable(rangeRating || 0);
-		
-		this.ammoTypes = ['Ilimitada', 'Frecuente', 'Normal', 'Rara'];
-	};
-	
-	var WeaponListModel = function() {
-	
-		var self = this;
-		self.weapons = ko.observableArray();
-		
-		self.weapons.push(new WeaponModel('Martillo', 1, 'Ilimitada', 4, 0));
-		self.weapons.push(new WeaponModel('Machete', 0.4, 'Ilimitada', 5, 0));
-		self.weapons.push(new WeaponModel('Pistola', 1, 'Frecuente', 0, 3));
-		self.weapons.push(new WeaponModel('Carabina', 2.5, 'Normal', 0, 4));
-
-		self.add = function(name) {
-			weapons.push(new WeaponModel(name));
-		};
-		
-		self.selectedWeapon = ko.observable();
-		
-		self.remove = function() {
-			// OJO: KO se encarga de que al recibir this sea un weapon
-			self.weapons.remove(this);
-		}
-		
-		self.edit = function() {
-			self.selectedWeapon(this);
-			$.mobile.changePage("#edit");
-		}
-		
-		self.totalWeight = ko.computed(function() {
-			var total = 0, i = 0;
-			ko.utils.arrayForEach(self.weapons(), function(w) {
-				total += w.weight();
-			});
-			return total;
-		}, this);
-	};
-	
 	$(function(){
-		var model = new WeaponListModel();
-		ko.applyBindings(model);
+		var viewModel = new ViewModel();
+		ko.applyBindings(new ViewModel());
 	});
 	</script>
 	
@@ -86,7 +42,7 @@
 	<div data-role="content">
 		<ul data-role="listview" data-bind="foreach: weapons">
 			<li>
-				<a href="#" data-bind="{ text: name, click: $parent.edit }"></a>
+				<a href="#" data-bind="{ text: name, click: $parent.edit, jqmChangePage: '#edit' }"></a>
 				<a href="#" data-bind="{ click: $parent.remove }" data-role="button" data-icon="delete" data-theme="d"></a>
 			</li>
 		</ul>
@@ -106,14 +62,22 @@
 
 	<div data-role="content">
 		<div data-role="fieldcontain">
-			<label for="weight">Peso</label>
-			<input type="number" id="weight" data-bind="value: weight"/>
-			<label for="ammoType">Munición</label>
-			<select id="ammoType" data-bind="options: ammoTypes, value: ammoType"></select>
-			<label for="closeCombatRating">Efectividad cuerpo a cuerpo</label>
-			<div id="closeCombatRating" data-bind="starRating: closeCombatRating"></div>
-			<label for="rangeRating">Efectividad a distancia</label>
-			<div id="rangeRating" data-bind="starRating: rangeRating"></div>
+			<div>
+				<label for="weight">Peso</label>
+				<input type="number" id="weight" data-bind="value: weight"/>
+			</div>
+			<div>
+				<label for="ammoType">Munición</label>
+				<select id="ammoType" data-bind="options: ammoTypes, value: ammoType"></select>
+			</div>
+			<div>
+				<label for="closeCombatRating">Efectividad cuerpo a cuerpo</label>
+				<div id="closeCombatRating" data-bind="starRating: closeCombatRating"></div>
+			</div>
+			<div>
+				<label for="rangeRating">Efectividad a distancia</label>
+				<p id="rangeRating" data-bind="starRating: rangeRating"></div>
+			</div>
 		</div>
 	</div>
 </div>

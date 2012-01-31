@@ -1,5 +1,4 @@
 // Custom binding sample from: http://learn.knockoutjs.com/#/?tutorial=custombindings
-
 ko.bindingHandlers.starRating = {
 	init: function(element, valueAccessor) {
 	
@@ -45,3 +44,13 @@ ko.bindingHandlers.jqmWith = {
 		return t;
 	}
 };
+
+// binding to enable "declarative" navigation between pages
+ko.bindingHandlers.jqmChangePage = {
+	'init': function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+		$(element).on('click', function() {
+			var page = valueAccessor();
+			$.mobile.changePage(page);
+		});
+	}
+}
