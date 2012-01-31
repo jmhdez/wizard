@@ -18,8 +18,15 @@ var ViewModel = function() {
 	self.weapons.push(new Weapon('Pistola', 1, 'Frecuente', 0, 3));
 	self.weapons.push(new Weapon('Carabina', 2.5, 'Normal', 0, 4));
 
-	self.add = function(name) {
-		weapons.push(new Weapon(name));
+	self.newWeaponName = ko.observable();
+	
+	self.add = function() {
+		self.weapons.push(new Weapon(self.newWeaponName()));
+		self.newWeaponName('')
+	};
+	
+	self.cancelAdd = function() {
+		self.newWeaponName('');
 	};
 	
 	self.selectedWeapon = ko.observable();

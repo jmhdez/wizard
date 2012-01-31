@@ -36,7 +36,7 @@
 <div data-role="page" id="home">
 	<div data-role="header">
 		<h1>W.I.Z.A.R&D</h1>
-		<a href="#" data-role="button" data-icon="add" class="add-new-note ui-btn-right">Añadir</a>
+		<a href="#" data-role="button" data-icon="add" class="add-new-note ui-btn-right" data-bind="jqmChangePage: '#addNew'">Añadir</a>
 	</div>
 
 	<div data-role="content">
@@ -79,6 +79,23 @@
 				<p id="rangeRating" data-bind="starRating: rangeRating"></div>
 			</div>
 		</div>
+	</div>
+</div>
+
+<div data-role="dialog" id="addNew">
+	<div data-role="header">
+		<h1>Añadir Arma</h1>
+	</div>
+
+	<div data-role="content">
+		<label for="newWeaponName">Nombre:</label>
+		<input type="text" name="newWeaponName" data-bind="value: newWeaponName"></input>
+	
+		<fieldset class="ui-grid-a">
+			<div class="ui-block-a"><a href="#" data-rel="back" data-role="button" data-bind="click: cancelAdd">Cancelar</a></div>
+			<div class="ui-block-b"><a href="#" data-rel="back" data-role="button" data-theme="b" data-bind="click: add">Aceptar</a></div>
+		</fieldset>
+		
 	</div>
 </div>
 
