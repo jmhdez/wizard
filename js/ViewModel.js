@@ -1,4 +1,4 @@
-var Weapon = function(name, weight, ammoType, closeCombatRating, rangeRating) {
+var WeaponViewModel = function(name, weight, ammoType, closeCombatRating, rangeRating) {
 	this.name = ko.observable(name);
 	this.weight = ko.observable(weight || 0);
 	this.ammoType = ko.observable(ammoType || 'Ilimitada');
@@ -8,20 +8,20 @@ var Weapon = function(name, weight, ammoType, closeCombatRating, rangeRating) {
 	this.ammoTypes = ['Ilimitada', 'Frecuente', 'Normal', 'Rara'];
 };
 
-var ViewModel = function() {
+var MainViewModel = function() {
 
 	var self = this;
 	self.weapons = ko.observableArray();
 	
-	self.weapons.push(new Weapon('Martillo', 1, 'Ilimitada', 4, 0));
-	self.weapons.push(new Weapon('Machete', 0.4, 'Ilimitada', 5, 0));
-	self.weapons.push(new Weapon('Pistola', 1, 'Frecuente', 0, 3));
-	self.weapons.push(new Weapon('Carabina', 2.5, 'Normal', 0, 4));
+	self.weapons.push(new WeaponViewModel('Martillo', 1, 'Ilimitada', 4, 0));
+	self.weapons.push(new WeaponViewModel('Machete', 0.4, 'Ilimitada', 5, 0));
+	self.weapons.push(new WeaponViewModel('Pistola', 1, 'Frecuente', 0, 3));
+	self.weapons.push(new WeaponViewModel('Carabina', 2.5, 'Normal', 0, 4));
 
 	self.newWeaponName = ko.observable();
 	
 	self.add = function() {
-		self.weapons.push(new Weapon(self.newWeaponName()));
+		self.weapons.push(new WeaponViewModel(self.newWeaponName()));
 		self.newWeaponName('')
 	};
 	
