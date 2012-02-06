@@ -1,10 +1,9 @@
 var WeaponViewModel = function(name, weight, ammoType, closeCombatRating, rangeRating) {
 	this.name = ko.observable(name);
-	this.weight = ko.observable(weight || 0);
+	this.weight = ko.numericObservable(weight || 0);
 	this.ammoType = ko.observable(ammoType || 'Ilimitada');
 	this.closeCombatRating = ko.observable(closeCombatRating || 0);
 	this.rangeRating = ko.observable(rangeRating || 0);
-	
 	this.ammoTypes = ['Ilimitada', 'Frecuente', 'Normal', 'Rara'];
 };
 
@@ -41,10 +40,10 @@ var MainViewModel = function() {
 	}
 	
 	self.totalWeight = ko.computed(function() {
-		var total = 0, i = 0;
+		var total = 0;
 		ko.utils.arrayForEach(self.weapons(), function(w) {
-			total += w.weight();
+			total = total + w.weight();
 		});
 		return total;
 	}, this);
-};
+};git 

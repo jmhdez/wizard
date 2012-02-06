@@ -1,3 +1,18 @@
+// Custom observable to bind numeric values
+ko.numericObservable = function(initialValue) {
+	var _actual = ko.observable(initialValue);
+
+	return ko.dependentObservable({
+		read: function() {
+			return _actual();  
+		},
+		write: function(newValue) {
+			var parsedValue = parseFloat(newValue);
+			_actual(isNaN(parsedValue ) ? newValue: parsedValue);
+		} 
+	});
+};
+
 // Custom binding sample from: http://learn.knockoutjs.com/#/?tutorial=custombindings
 ko.bindingHandlers.starRating = {
 	init: function(element, valueAccessor) {
