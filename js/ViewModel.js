@@ -14,9 +14,9 @@ var MainViewModel = function() {
 	self.weapons = ko.observableArray();
 	
 	self.weapons.push(new WeaponViewModel('Martillo', 1, 'Ilimitada', 4, 0));
-	self.weapons.push(new WeaponViewModel('Machete', 0.4, 'Ilimitada', 5, 0));
+	self.weapons.push(new WeaponViewModel('Machete', 1, 'Ilimitada', 5, 0));
 	self.weapons.push(new WeaponViewModel('Pistola', 1, 'Frecuente', 0, 3));
-	self.weapons.push(new WeaponViewModel('Carabina', 2.5, 'Normal', 0, 4));
+	self.weapons.push(new WeaponViewModel('Carabina', 3, 'Normal', 0, 4));
 
 	self.newWeaponName = ko.observable();
 	
