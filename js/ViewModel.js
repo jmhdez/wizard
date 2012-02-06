@@ -46,4 +46,4 @@ var MainViewModel = function() {
 		});
 		return total;
 	}, this);
-};git 
+};
