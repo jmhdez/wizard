@@ -2,7 +2,7 @@
 ko.numericObservable = function(initialValue) {
 	var _actual = ko.observable(initialValue);
 
-	return ko.dependentObservable({
+	return ko.computed({
 		read: function() {
 			return _actual();  
 		},
