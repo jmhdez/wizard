@@ -1,33 +1,15 @@
-var WeaponViewModel = function(name, weight, ammoType, closeCombatRating, rangeRating) {
-	this.name = ko.observable(name);
-	this.weight = ko.numericObservable(weight || 0);
-	this.ammoType = ko.observable(ammoType || 'Ilimitada');
-	this.closeCombatRating = ko.observable(closeCombatRating || 0);
-	this.rangeRating = ko.observable(rangeRating || 0);
-	this.ammoTypes = ['Ilimitada', 'Frecuente', 'Normal', 'Rara'];
-};
-
-var MainViewModel = function() {
+function MainViewModel() {
 
 	var self = this;
+	
 	self.weapons = ko.observableArray();
-	
-	self.weapons.push(new WeaponViewModel('Martillo', 1, 'Ilimitada', 4, 0));
-	self.weapons.push(new WeaponViewModel('Machete', 1, 'Ilimitada', 5, 0));
-	self.weapons.push(new WeaponViewModel('Pistola', 1, 'Frecuente', 0, 3));
-	self.weapons.push(new WeaponViewModel('Carabina', 3, 'Normal', 0, 4));
+	self.weapons.push(new EditWeaponViewModel('Martillo', 1, 'Ilimitada', 4, 0));
+	self.weapons.push(new EditWeaponViewModel('Machete', 1, 'Ilimitada', 5, 0));
+	self.weapons.push(new EditWeaponViewModel('Pistola', 1, 'Frecuente', 0, 3));
+	self.weapons.push(new EditWeaponViewModel('Carabina', 3, 'Normal', 0, 4));
 
-	self.newWeaponName = ko.observable();
-	
-	self.add = function() {
-		self.weapons.push(new WeaponViewModel(self.newWeaponName()));
-		self.newWeaponName('')
-	};
-	
-	self.cancelAdd = function() {
-		self.newWeaponName('');
-	};
-	
+	self.newWeapon = new NewWeaponViewModel(self.weapons);
+
 	self.selectedWeapon = ko.observable();
 	
 	self.remove = function() {
@@ -47,3 +29,27 @@ var MainViewModel = function() {
 		return total;
 	}, this);
 };
+
+function EditWeaponViewModel(name, weight, ammoType, closeCombatRating, rangeRating) {
+	this.name = ko.observable(name);
+	this.weight = ko.numericObservable(weight || 0);
+	this.ammoType = ko.observable(ammoType || 'Ilimitada');
+	this.closeCombatRating = ko.observable(closeCombatRating || 0);
+	this.rangeRating = ko.observable(rangeRating || 0);
+	this.ammoTypes = ['Ilimitada', 'Frecuente', 'Normal', 'Rara'];
+};
+
+function NewWeaponViewModel(existingWeapons) {
+	
+	var self = this;
+	self.name = ko.observable('');
+	
+	this.clear = function() {
+		self.name('')
+	};
+	this.add = function() {
+		existingWeapons.push(new EditWeaponViewModel(self.name()));
+		self.clear();
+	};
+}
+
