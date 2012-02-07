@@ -15,11 +15,11 @@ function MainViewModel() {
 	self.remove = function() {
 		// Here, "this" is a WeaponModel (thanks to Knockout)
 		self.weapons.remove(this);
-	}
+	};
 	
 	self.edit = function() {
 		self.selectedWeapon(this);
-	}
+	};
 	
 	self.totalWeight = ko.computed(function() {
 		var total = 0;
